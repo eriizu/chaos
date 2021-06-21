@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "incremental": true,
     "baseUrl": ".",
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",

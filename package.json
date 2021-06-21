@@ -1,5 +1,5 @@
 {
-    "name": "ts-templace",
+    "name": "chaos",
     "version": "1.0.0",
     "scripts": {
         "build": "tsc",
@@ -9,10 +9,13 @@
         "clean": "rm -vfr node_modules reports",
         "fclean": "rm -vfr node_modules reports dist"
     },
-    "description": "Yet another typescript template",
+    "description": "WIP A service to keep track of other services, servers and workstations",
     "main": "dist/index.js",
     "private": false,
-    "dependencies": {},
+    "dependencies": {
+        "ajv": "^8.6.0",
+        "ajv-formats": "^2.1.0"
+    },
     "devDependencies": {
         "@tsconfig/node16": "^1.0.1",
         "@types/jest": "^25.2.3",
