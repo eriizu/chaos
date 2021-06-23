@@ -6,7 +6,7 @@ export interface IStatus {
   hostname: string;
   boot_id: string;
   machine_id: string;
-  on: Date;
+  on: Date | null;
   logged_in?: string[];
 }
 
@@ -16,9 +16,9 @@ const tdSchema = {
     hostname: { type: "string" },
     boot_id: { type: "string" },
     machine_id: { type: "string" },
-    on: { type: "timestamp" },
   },
   optionalProperties: {
+    on: { type: "timestamp" },
     logged_in: { elements: { type: "string" } },
   },
 };

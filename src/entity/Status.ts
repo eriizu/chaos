@@ -19,7 +19,7 @@ export class Status implements IStatus {
   @orm.Column()
   machine_id!: string;
 
-  @orm.Column()
+  @orm.Column({ default: () => "CURRENT_TIMESTAMP" })
   on!: Date;
 
   @orm.Column({ type: "simple-array", nullable: true })
