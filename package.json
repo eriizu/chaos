@@ -14,10 +14,15 @@
     "private": false,
     "dependencies": {
         "ajv": "^8.6.0",
-        "ajv-formats": "^2.1.0"
+        "ajv-formats": "^2.1.0",
+        "express": "^4.17.1",
+        "express-idempotency": "^1.0.4",
+        "pg": "^8.6.0",
+        "typeorm": "^0.2.34"
     },
     "devDependencies": {
         "@tsconfig/node16": "^1.0.1",
+        "@types/express": "^4.17.12",
         "@types/jest": "^25.2.3",
         "@types/node": "^15.12.3",
         "jest": "^27.0.4",

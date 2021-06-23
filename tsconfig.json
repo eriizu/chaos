@@ -6,7 +6,8 @@
     "experimentalDecorators": true,
     "incremental": true,
     "baseUrl": ".",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
   },
   "include": [
     "src/**/*.ts",

@@ -1,8 +1,5 @@
 import Ajv, { JTDDataType } from "ajv/dist/jtd";
 const ajv = new Ajv();
-import addFormats from "ajv-formats";
-
-addFormats(ajv);
 
 enum EWorkstationState {
   offline = "OFFLINE",
@@ -10,18 +7,12 @@ enum EWorkstationState {
   restricted = "RESTRICTED",
 }
 
-// interface IWorkstationIds {
-//   machine?: string;
-//   boot?: string;
-//   mac?: string;
-// }
-
 interface IDated {
   created_on: Date;
   edited_on: Date;
 }
 
-interface IWorkstation extends IDated {
+export interface IWorkstation extends IDated {
   id?: {
     machine?: string;
     boot?: string;
@@ -59,26 +50,27 @@ const tdSchema = {
   },
 };
 
-const validate = ajv.compile<IWorkstation>(tdSchema);
+export const validate = ajv.compile<IWorkstation>(tdSchema);
+export const parse = ajv.compileParser<IWorkstation>(tdSchema);
 
-var testdata = {
-  ip_addr: "127.0.0.1",
-  hostname: "alarmpi",
-  created_on: new Date(),
-};
+// var testdata = {
+//   ip_addr: "127.0.0.1",
+//   hostname: "alarmpi",
+//   created_on: new Date(),
+// };
 
-function prout(data: any) {
-  if (validate(data)) {
-    console.log(data);
-    console.log("ok!");
-  } else {
-    console.log(ajv.errorsText(validate.errors));
-  }
-}
-prout(testdata);
+// function prout(data: any) {
+//   if (validate(data)) {
+//     console.log(data);
+//     console.log("ok!");
+//   } else {
+//     console.log(ajv.errorsText(validate.errors));
+//   }
+// }
+// prout(testdata);
 
-var testdata2 = {
-  ip_addr: "127.0.0.1",
-};
+// var testdata2 = {
+//   ip_addr: "127.0.0.1",
+// };
 
-prout(testdata2);
+// prout(testdata2);
