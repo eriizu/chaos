@@ -7,70 +7,34 @@ enum EWorkstationState {
   restricted = "RESTRICTED",
 }
 
-interface IDated {
-  created_on: Date;
-  edited_on: Date;
-}
-
-export interface IWorkstation extends IDated {
-  id?: {
-    machine?: string;
-    boot?: string;
-    mac?: string;
-  };
+export interface IWorkstation {
   ip_addr: string;
   hostname: string;
+  online: boolean;
+
+  machine_id: string;
+  boot_id?: string;
+
   location?: string;
-  // last_ping: Date;
-  // users_online: string[];
-  // state: EWorkstationState;
+  created_on?: Date;
+  edited_on?: Date;
 }
 
 const tdSchema = {
-  definitions: {
-    id: {
-      optionalProperties: {
-        machine: { type: "string" },
-        boot: { type: "string" },
-        mac: { type: "string" },
-      },
-    },
-  },
+  definitions: {},
   properties: {
-    ip_addr: { type: "string" },
     hostname: { type: "string" },
+    boot_id: { type: "string" },
+    machine_id: { type: "string" },
   },
   optionalProperties: {
+    ip_addr: { type: "string" },
+    online: { type: "boolean" },
     location: { type: "string" },
     created_on: { type: "timestamp" },
     edited_on: { type: "timestamp" },
-    id: {
-      ref: "id",
-    },
   },
 };
 
 export const validate = ajv.compile<IWorkstation>(tdSchema);
 export const parse = ajv.compileParser<IWorkstation>(tdSchema);
-
-// var testdata = {
-//   ip_addr: "127.0.0.1",
-//   hostname: "alarmpi",
-//   created_on: new Date(),
-// };
-
-// function prout(data: any) {
-//   if (validate(data)) {
-//     console.log(data);
-//     console.log("ok!");
-//   } else {
-//     console.log(ajv.errorsText(validate.errors));
-//   }
-// }
-// prout(testdata);
-
-// var testdata2 = {
-//   ip_addr: "127.0.0.1",
-// };
-
-// prout(testdata2);
