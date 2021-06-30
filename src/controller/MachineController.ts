@@ -3,6 +3,8 @@ import { Machine as EntityMachine } from "../entity/Machine";
 import { db_conn } from "../db";
 
 export async function intakeStatus(status: IStatus) {
+  console.log("intaking:");
+  console.log(status);
   let update_res = await db_conn
     .createQueryBuilder()
     .update(EntityMachine)
@@ -23,7 +25,6 @@ export async function intakeStatus(status: IStatus) {
     machine.boot_id = status.boot_id;
     machine.hostname = status.hostname;
     machine.online = true;
-    machine.edited_on = new Date();
   } else {
     // create it
     machine = new EntityMachine({

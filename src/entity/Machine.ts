@@ -34,4 +34,15 @@ export class Machine implements IWorkstation {
   constructor(src: IWorkstation) {
     Object.assign(this, src);
   }
+
+  // @orm.BeforeInsert()
+  // setDates() {
+  //   if (!this.created_on) this.created_on = new Date();
+  //   this.edited_on = new Date();
+  // }
+
+  @orm.BeforeUpdate()
+  bumpDate() {
+    this.edited_on = new Date();
+  }
 }

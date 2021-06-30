@@ -1,5 +1,6 @@
 import * as orm from "typeorm";
 import { IStatus } from "../types/Status";
+import * as ctrlMachine from "../controller/MachineController";
 
 @orm.Entity()
 export class Status implements IStatus {
@@ -27,5 +28,10 @@ export class Status implements IStatus {
 
   constructor(src: IStatus) {
     Object.assign(this, src);
+  }
+
+  @orm.AfterInsert()
+  async intakeStatus() {
+    await ctrlMachine.intakeStatus(this);
   }
 }

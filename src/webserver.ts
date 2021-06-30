@@ -41,7 +41,7 @@ webserv.post("/status", async (req, res) => {
     try {
       await db_conn.manager.save(status_entry);
       res.status(201).send(status_entry);
-      ctrlMachine.intakeStatus(status_entry).catch(console.error);
+      // ctrlMachine.intakeStatus(status_entry).catch(console.error);
     } catch (err) {
       console.error(err);
       res.status(500).send(err);
