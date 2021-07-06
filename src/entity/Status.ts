@@ -30,6 +30,13 @@ export class Status implements IStatus {
     Object.assign(this, src);
   }
 
+  @orm.BeforeInsert()
+  cleanUUID() {
+    this.boot_id = this.boot_id.replaceAll("-", "");
+    this.machine_id = this.machine_id.replaceAll("-", "");
+    console.log("before insert " + this.boot_id + " " + this.machine_id);
+  }
+
   @orm.AfterInsert()
   async intakeStatus() {
     await ctrlMachine.intakeStatus(this);

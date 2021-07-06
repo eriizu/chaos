@@ -1,6 +1,9 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
+    "lib": [
+      "ES2021"
+    ],
     "outDir": "dist",
     "sourceMap": true,
     "experimentalDecorators": true,

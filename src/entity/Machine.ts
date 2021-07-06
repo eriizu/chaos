@@ -31,6 +31,9 @@ export class Machine implements IWorkstation {
   @orm.Column({ default: () => "CURRENT_TIMESTAMP" })
   edited_on?: Date;
 
+  @orm.DeleteDateColumn({})
+  deleted_on?: Date;
+
   constructor(src: IWorkstation) {
     Object.assign(this, src);
   }
