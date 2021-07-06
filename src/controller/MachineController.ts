@@ -3,9 +3,7 @@ import { Machine as EntityMachine } from "../entity/Machine";
 import { db_conn } from "../db";
 
 export async function intakeStatus(status: IStatus) {
-  console.log("intaking:");
-  console.log(status);
-  let update_res = await db_conn
+  await db_conn
     .createQueryBuilder()
     .update(EntityMachine)
     .set({ online: false, edited_on: new Date(), ip_addr: "" })
@@ -14,7 +12,6 @@ export async function intakeStatus(status: IStatus) {
       2: status.machine_id,
     })
     .execute();
-  console.log(update_res);
 
   let machine = await db_conn.manager.findOne(EntityMachine, {
     where: { machine_id: status.machine_id },

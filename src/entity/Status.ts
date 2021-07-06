@@ -34,7 +34,6 @@ export class Status implements IStatus {
   cleanUUID() {
     this.boot_id = this.boot_id.replaceAll("-", "");
     this.machine_id = this.machine_id.replaceAll("-", "");
-    console.log("before insert " + this.boot_id + " " + this.machine_id);
   }
 
   @orm.AfterInsert()
