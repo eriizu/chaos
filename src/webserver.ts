@@ -57,6 +57,22 @@ webserv.all("*", (req, res, next) => {
 
 webserv.post("/status", async (req, res) => {
   let body = req.body;
+  // array coertion is needed when data comes from a form
+  // data validator ajv doesn't support coertion with JTD...
+  // I would use the other schema type, if it supported timestamps.
+  let coerceArrayLoggedIn = (bdy: any) => {
+    if (typeof bdy.logged_in === "string") {
+      let tmp: string[] = [];
+      tmp.push(bdy.logged_in);
+      bdy.logged_in = tmp;
+    }
+  };
+  // console.log(body);
+  // console.log(typeof body.logged_in);
+  // console.log(body);
+
+  coerceArrayLoggedIn(body);
+
   if (status.validate(body)) {
     let status_entry = new EntityStatus(body);
     try {
