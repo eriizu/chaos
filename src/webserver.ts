@@ -65,11 +65,10 @@ webserv.post("/status", async (req, res) => {
       let tmp: string[] = [];
       tmp.push(bdy.logged_in);
       bdy.logged_in = tmp;
+    } else if (bdy.logged_in instanceof Array && (bdy.logged_in as Array<string>).length == 0) {
+      bdy.logged_in = null;
     }
   };
-  // console.log(body);
-  // console.log(typeof body.logged_in);
-  // console.log(body);
 
   coerceArrayLoggedIn(body);
 
@@ -84,6 +83,16 @@ webserv.post("/status", async (req, res) => {
     }
   } else {
     res.status(400).send(status.validate.errors);
+  }
+});
+
+webserv.get("/statuses", async (req, res, error) => {
+  try {
+    let stati = await db_conn.manager.find(EntityStatus);
+
+    res.send(stati);
+  } catch (err) {
+    error(err);
   }
 });
 

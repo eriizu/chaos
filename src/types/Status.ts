@@ -1,7 +1,8 @@
 import Ajv, { JTDDataType } from "ajv/dist/jtd";
+import { ILoginSession } from "./LoginSession";
 const ajv = new Ajv();
 
-export interface IStatus {
+interface IBaseStatus {
   ip_addr: string;
   hostname: string;
   boot_id: string;
@@ -9,6 +10,10 @@ export interface IStatus {
   on: Date | null;
   logged_in?: string[];
 }
+
+export interface IStatus extends IBaseStatus {}
+
+export interface IStatusIntake extends IBaseStatus {}
 
 const tdSchema = {
   properties: {
@@ -23,5 +28,5 @@ const tdSchema = {
   },
 };
 
-export const validate = ajv.compile<IStatus>(tdSchema);
-export const parse = ajv.compileParser<IStatus>(tdSchema);
+export const validate = ajv.compile<IStatusIntake>(tdSchema);
+export const parse = ajv.compileParser<IStatusIntake>(tdSchema);

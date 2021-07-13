@@ -3,8 +3,8 @@ import { IWorkstation } from "../types/Workstation";
 
 @orm.Entity()
 export class Machine implements IWorkstation {
-  @orm.PrimaryColumn({ generated: "uuid" })
-  id!: string;
+  @orm.PrimaryColumn({ generated: "increment" })
+  id!: number;
 
   @orm.Index()
   @orm.Column({})

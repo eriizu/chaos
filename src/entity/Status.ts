@@ -1,6 +1,9 @@
 import * as orm from "typeorm";
-import { IStatus } from "../types/Status";
+import { IStatus, IStatusIntake } from "../types/Status";
+// import { ILoginSession } from "../types/LoginSession";
+import { LoginSession } from "./LoginSession";
 import * as ctrlMachine from "../controller/MachineController";
+import { db_conn } from "../db";
 
 @orm.Entity()
 export class Status implements IStatus {
@@ -23,11 +26,17 @@ export class Status implements IStatus {
   @orm.Column({ default: () => "CURRENT_TIMESTAMP" })
   on!: Date;
 
-  @orm.Column({ type: "simple-array", nullable: true })
+  @orm.Column({ type: "simple-array" })
   logged_in?: string[];
 
-  constructor(src: IStatus) {
-    Object.assign(this, src);
+  constructor(src: IStatusIntake) {
+    if (!src) return;
+    this.boot_id = src.boot_id;
+    this.machine_id = src.machine_id;
+    this.ip_addr = src.ip_addr;
+    this.hostname = src.hostname;
+    this.on = src.on || new Date();
+    this.logged_in = src.logged_in;
   }
 
   @orm.BeforeInsert()

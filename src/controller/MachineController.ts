@@ -32,5 +32,5 @@ export async function intakeStatus(status: IStatus) {
       online: true,
     });
   }
-  await db_conn.manager.save(machine);
+  return await db_conn.manager.save(machine);
 }
